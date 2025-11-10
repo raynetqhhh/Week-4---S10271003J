@@ -1,0 +1,90 @@
+/* Reset & base */
+* { box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f6f6f6;
+}
+
+/* Container */
+.container {
+  display: flex;
+  flex-direction: row; /* ensure horizontal layout on desktop */
+  flex-wrap: wrap; /* allow items to wrap on small screens */
+  align-items: stretch;
+  gap: 24px;
+  max-width: 1100px;
+  margin: 48px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+/* Split columns */
+.split { padding: 12px; }
+
+/* Default (desktop): two equal columns with image on the left and text on the right */
+.split { flex: 0 0 50%; }
+
+.split:first-child {
+  /* image column: keep image full width and vertically centered if height differs */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.split:nth-child(2) {
+  /* text column: stack content and center vertically */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px;
+}
+
+.split img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+h2 { margin-top: 0; }
+
+.button {
+  display: inline-block;
+  background: #28a745;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 4px;
+  text-decoration: none;
+  margin-top: 12px;
+}
+
+/* Tablet / small desktop */
+@media (max-width: 920px) {
+  .container { padding: 20px; gap: 18px; }
+  .split { flex: 1 1 48%; }
+  /* keep image column above/beside depending on width */
+  .split:first-child, .split:nth-child(2) {
+    display: block;
+  }
+}
+
+/* Mobile: 2-column layout */
+@media (max-width: 600px) {
+  .container { gap: 12px; padding: 12px; }
+  .split { flex: 1 1 48%; }
+  .split img { max-height: 220px; object-fit: cover; width: 100%; }
+  /* on narrow mobile ensure text column flows naturally */
+  .split:nth-child(2) { display: block; }
+}
+
+/* Very small phones: single column stacked */
+@media (max-width: 420px) {
+  .split { flex: 1 1 100%; }
+  .split img { max-height: none; }
+}
